@@ -7,3 +7,11 @@ edition = "2021"
 
 [dependencies]
 yew = { version = "0.20.0", features = ["csr"] }
+js-sys = "0.3.61"
+[dependencies.web-sys]
+version = "0.3"
+features = [
+    "HtmlInputElement",
+]
+
+
