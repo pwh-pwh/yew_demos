@@ -1,11 +1,20 @@
-use yew::{AttrValue, Callback, function_component, html, Html, Properties, use_state, UseStateHandle};
+use yew::{AttrValue, Callback, ContextProvider, function_component, html, Html, Properties, use_memo, use_state, UseStateHandle};
 use crate::components::todoInput::TodoInput;
+use std::rc::Rc;
 use crate::components::todoList::TodoList;
+
 #[derive(PartialEq, Properties,Clone)]
 pub struct TodoProps {
     pub id:i64,
     pub text:AttrValue,
     pub isFinished:bool,
+}
+
+#[derive(Clone,PartialEq)]
+pub struct ContextProps {
+    pub todoList: Vec<TodoProps>,
+    pub changeTodo: Callback<i64>,
+    pub addTodo: Callback<TodoProps>,
 }
 
 #[function_component]
@@ -26,16 +35,6 @@ pub fn Todo() -> Html {
         }
     };
 
-    /*let addTodo = {
-        let mut todoList = (*todoListState).clone();
-        let todoListState = todoListState.clone();
-        move|todo: TodoProps| {
-            let mut todoList = todoList.clone();
-            todoList.push(todo);
-            todoListState.set(todoList.clone());
-        }
-    };*/
-
     let addTodo = {
         let mut todoList = (*todoListState).clone();
         let todoListState = todoListState.clone();
@@ -45,12 +44,18 @@ pub fn Todo() -> Html {
             todoListState.set(todoList);
         })
     };
-
     let todoList = (*todoListState).clone();
+    let ctx = ContextProps {
+        todoList: (*todoListState).clone(),
+        changeTodo: Callback::from(changeTodo),
+        addTodo,
+    };
     html! {
+        <ContextProvider<ContextProps> context={ctx}>
         <div class="container">
-            <TodoInput {addTodo}/>
-            <TodoList todoList={todoList} changeTodo={changeTodo}/>
+            <TodoInput/>
+            <TodoList/>
         </div>
+        </ContextProvider<ContextProps>>
     }
 }
