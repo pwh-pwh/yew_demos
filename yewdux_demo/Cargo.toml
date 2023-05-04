@@ -9,6 +9,7 @@ edition = "2021"
 yew = { version = "0.20.0", features = ["csr"] }
 js-sys = "0.3.61"
 yewdux = "0.9.2"
+gloo-console = "0.2.3"
 [dependencies.web-sys]
 version = "0.3"
 features = [
