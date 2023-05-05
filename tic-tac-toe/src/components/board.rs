@@ -15,10 +15,29 @@ pub fn Board() -> Html {
         }
     };
 
+    /*let h2 = {
+        let boardState = boardState.clone();
+        move|index:usize| {
+            let mut bs = (*boardState).clone();
+            bs[index] = "X".into();
+            boardState.set(bs);
+        }
+    };*/
 
     html!{
        <>
         <div class="board-row">
+
+            /*<Square value={(*boardState)[0].clone()} onSquareClick={
+            let h2 = h2.clone();
+            Callback::from(move|_|h2(0))
+        }/>
+
+        <Square value={(*boardState)[0].clone()} onSquareClick={
+            let h2 = h2.clone();
+            Callback::from(move|_|h2(0))
+        }/>*/
+
             <Square value={(*boardState)[0].clone()} onSquareClick={handlerClick(0)}/>
             <Square value={(*boardState)[1].clone()} onSquareClick={handlerClick(1)}/>
             <Square value={(*boardState)[2].clone()} onSquareClick={handlerClick(2)}/>
