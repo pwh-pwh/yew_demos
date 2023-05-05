@@ -1,2 +1,2 @@
 [workspace]
-members = ["props_demo","context_demo","reducer_demo","yewdux_demo"]
+members = ["props_demo","context_demo","reducer_demo","yewdux_demo","tic-tac-toe"]
